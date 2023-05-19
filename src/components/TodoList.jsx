@@ -15,6 +15,36 @@ export const TodoList = () => {
                         </div>
                     </form>
                 </div>
+                <div className="todo-lists d-flex justify-content-center mt-4">
+                    <div className="todos">
+                        <ul className="list-group">
+                            <li className="list-group-item">
+                                <div className="form-check">
+                                    <input type="checkbox" className='form-check-input' name="" id="" />
+                                    <label className="form-check-label">
+                                        Belajar React
+                                    </label>
+                                </div>
+                            </li>
+                            <li className="list-group-item">
+                                <div className="form-check">
+                                    <input type="checkbox" className='form-check-input' name="" id="" />
+                                    <label className="form-check-label">
+                                        Belajar Redux
+                                    </label>
+                                </div>
+                            </li>
+                            <li className="list-group-item">
+                                <div className="form-check">
+                                    <input type="checkbox" className='form-check-input' name="" id="" />
+                                    <label className="form-check-label">
+                                        Belajar Hooks
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </>
     )
