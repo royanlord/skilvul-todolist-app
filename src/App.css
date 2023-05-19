@@ -1,0 +1,25 @@
+/* * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} */
+
+.container {
+  width: 60%;
+  margin-top: 12vh;
+  height: 75vh;
+  border-radius: 15px;
+}
+
+form {
+  width: 70%;
+}
+
+/* .todo-input button {
+  width: 100%;
+} */
+@media screen and (max-width: 992px) {
+  .container {
+    width: 85%
+  }
+}
