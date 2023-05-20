@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 export const TodoList = () => {
     return (
         <>
-            <div className="container box bg-danger">
+            <div className="container box">
                 <h1 className='text-center pt-4'>Todolist App</h1>
                 <div className="todo-input d-flex justify-content-center mt-lg-5 mt-4">
                     <form>
