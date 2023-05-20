@@ -2,27 +2,44 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { addTodo, deleteTodo } from "../redux/actions/todoAction"
 
 export const TodoList = () => {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const [inputTodo, setInputTodo] = useState("")
     const {todos} = useSelector(state => state)
     console.log(todos);
+    
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        // console.log(inputTodo);
+        
+        const newTodo = {
+            id: Date.now(),
+            title: inputTodo,
+            isDone: false
+        }
+
+        dispatch(addTodo(newTodo))
+        setInputTodo("")
+    }
 
     return (
         <>
             <div className="container box">
                 <h1 className='text-center pt-4'>Todolist App</h1>
                 <div className="todo-input d-flex justify-content-center mt-lg-5 mt-4">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="row d-flex justify-content-center">
                         <div className="col-lg-7 col-md-12">
                             <input 
                                 type="text" 
-                                name="" 
+                                name="todo" 
                                 id="" 
                                 className="form-control py-lg-2 py-1" 
                                 placeholder='New Todo' 
+                                value={inputTodo} 
+                                onChange={e => setInputTodo(e.target.value)}
                             />
                         </div>
                         <div className="col-lg-2 col-md-12 pt-lg-0 pt-2">
@@ -31,61 +48,48 @@ export const TodoList = () => {
                         </div>
                     </form>
                 </div>
+
+                
                 
                 <div className="todo-lists d-flex justify-content-center mt-4">
                     <div className="todos">
-                        <ul className="list-group">
-                            {todos.map(item => (
-                                <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
-                                    <div className="form-check">
-                                        <input type="checkbox" className='form-check-input' name="" id="" />
-                                        <label className="form-check-label">
-                                            {item.title}
-                                        </label>
-                                    </div>
-                                    <div className="btn-group">
-                                        <a className="btn" style={{padding: "7px"}}>
-                                            <FontAwesomeIcon icon={faPen} size="sm" style={{color: "green"}} />
-                                        </a>
-                                        <a className="btn" style={{padding: "7px"}}>
-                                            <FontAwesomeIcon icon={faTrash} size="sm" style={{color: "red"}} />
-                                        </a>
-                                    </div>
-                                </li>
-                            ))}
-                            {/* <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <div className="form-check">
-                                    <input type="checkbox" className='form-check-input' name="" id="" />
-                                    <label className="form-check-label">
-                                        Belajar Redux
-                                    </label>
-                                </div>
-                                <div className="btn-group">
-                                <button className="btn" style={{padding: "7px"}}>
-                                        <FontAwesomeIcon icon={faPen} size="sm" style={{color: "green"}} />
-                                    </button>
-                                    <button className="btn" style={{padding: "7px"}}>
-                                        <FontAwesomeIcon icon={faTrash} size="sm" style={{color: "red"}} />
-                                    </button>
-                                </div>
+                        <ul className="nav nav-tabs" id="myTab" role="tablist">
+                            <li className="nav-item" role="presentation">
+                                <button className="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all-tab-pane" type="button" role="tab" aria-controls="all-tab-pane" aria-selected="true">ALL</button>
                             </li>
-                            <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <div className="form-check">
-                                    <input type="checkbox" className='form-check-input' name="" id="" />
-                                    <label className="form-check-label">
-                                        Belajar Hooks
-                                    </label>
-                                </div>
-                                <div className="btn-group">
-                                <button className="btn" style={{padding: "7px"}}>
-                                        <FontAwesomeIcon icon={faPen} size="sm" style={{color: "green"}} />
-                                    </button>
-                                    <button className="btn" style={{padding: "7px"}}>
-                                        <FontAwesomeIcon icon={faTrash} size="sm" style={{color: "red"}} />
-                                    </button>
-                                </div>
-                            </li> */}
+                            <li className="nav-item" role="presentation">
+                                <button className="nav-link" id="active-tab" data-bs-toggle="tab" data-bs-target="#active-tab-pane" type="button" role="tab" aria-controls="active-tab-pane" aria-selected="false">ACTIVE</button>
+                            </li>
+                            <li className="nav-item" rol="presentation">
+                                <button className="nav-link" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed-tab-pane" type="button" role="tab" aria-controls="completed-tab-pane" aria-selected="false">COMPLETED</button>
+                            </li>
                         </ul>
+                        <div className="tab-content" id="myTabContent">
+                            <div className="tab-pane fade show active" id="all-tab-pane" role="tabpanel" aria-labelledby="all-tab" tabIndex="0">
+                                <ul className="list-group">
+                                    {todos.map((item, index) => (
+                                        <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                                            <div className="form-check">
+                                                <input type="checkbox" className='form-check-input' name="" id="" />
+                                                <label className="form-check-label">
+                                                    {item.title}
+                                                </label>
+                                            </div>
+                                            <div className="btn-group">
+                                                <button className="btn" style={{padding: "7px", border: "none"}}>
+                                                    <FontAwesomeIcon icon={faPen} size="sm" style={{color: "green"}} />
+                                                </button>
+                                                <button onClick={() => dispatch(deleteTodo(item))} className="btn" style={{padding: "7px", border: "none"}}>
+                                                    <FontAwesomeIcon icon={faTrash} size="sm" style={{color: "red"}} />
+                                                </button>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className="tab-pane fade" id="active-tab-pane" role="tabpanel" aria-labelledby="active-tab" tabIndex="0">...</div>
+                            <div className="tab-pane fade" id="completed-tab-pane" role="tabpanel" aria-labelledby="completed-tab" tabIndex="0">...</div>
+                        </div>                     
                     </div>
                 </div>
             </div>
