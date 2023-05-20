@@ -4,7 +4,7 @@
   padding: 0;
 } */
 
-.container {
+.box {
   width: 60%;
   margin-top: 12vh;
   height: 75vh;
@@ -19,11 +19,15 @@ form {
   width: 55%;
 }
 
+.form-check-label {
+  word-break: break-all;
+}
+
 /* .todo-input button {
   width: 100%;
 } */
 @media screen and (max-width: 992px) {
-  .container {
+  .box {
     width: 85%
   }
 
