@@ -1,7 +1,14 @@
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 export const TodoList = () => {
+    // const dispatch = useDispatch()
+    const [inputTodo, setInputTodo] = useState("")
+    const {todos} = useSelector(state => state)
+    console.log(todos);
+
     return (
         <>
             <div className="container box">
@@ -10,7 +17,13 @@ export const TodoList = () => {
                     <form>
                         <div className="row d-flex justify-content-center">
                         <div className="col-lg-7 col-md-12">
-                            <input type="text" name="" id="" className="form-control py-lg-2 py-1" placeholder='New Todo' />
+                            <input 
+                                type="text" 
+                                name="" 
+                                id="" 
+                                className="form-control py-lg-2 py-1" 
+                                placeholder='New Todo' 
+                            />
                         </div>
                         <div className="col-lg-2 col-md-12 pt-lg-0 pt-2">
                             <button type='submit' className='btn btn-primary py-lg-2 py-1 w-100'>Add</button>
@@ -18,26 +31,29 @@ export const TodoList = () => {
                         </div>
                     </form>
                 </div>
+                
                 <div className="todo-lists d-flex justify-content-center mt-4">
                     <div className="todos">
                         <ul className="list-group">
-                            <li className="list-group-item d-flex justify-content-between align-items-center">
-                                <div className="form-check">
-                                    <input type="checkbox" className='form-check-input' name="" id="" />
-                                    <label className="form-check-label">
-                                        Belajar React
-                                    </label>
-                                </div>
-                                <div className="btn-group">
-                                    <button className="btn" style={{padding: "7px"}}>
-                                        <FontAwesomeIcon icon={faPen} size="sm" style={{color: "green"}} />
-                                    </button>
-                                    <button className="btn" style={{padding: "7px"}}>
-                                        <FontAwesomeIcon icon={faTrash} size="sm" style={{color: "red"}} />
-                                    </button>
-                                </div>
-                            </li>
-                            <li className="list-group-item d-flex justify-content-between align-items-center">
+                            {todos.map(item => (
+                                <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
+                                    <div className="form-check">
+                                        <input type="checkbox" className='form-check-input' name="" id="" />
+                                        <label className="form-check-label">
+                                            {item.title}
+                                        </label>
+                                    </div>
+                                    <div className="btn-group">
+                                        <a className="btn" style={{padding: "7px"}}>
+                                            <FontAwesomeIcon icon={faPen} size="sm" style={{color: "green"}} />
+                                        </a>
+                                        <a className="btn" style={{padding: "7px"}}>
+                                            <FontAwesomeIcon icon={faTrash} size="sm" style={{color: "red"}} />
+                                        </a>
+                                    </div>
+                                </li>
+                            ))}
+                            {/* <li className="list-group-item d-flex justify-content-between align-items-center">
                                 <div className="form-check">
                                     <input type="checkbox" className='form-check-input' name="" id="" />
                                     <label className="form-check-label">
@@ -68,7 +84,7 @@ export const TodoList = () => {
                                         <FontAwesomeIcon icon={faTrash} size="sm" style={{color: "red"}} />
                                     </button>
                                 </div>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>
