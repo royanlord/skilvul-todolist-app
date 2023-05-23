@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO } from "../actions/todoAction"
+import { ADD_TODO, DELETE_TODO, EDIT_TODO } from "../actions/todoAction"
 
 const initialState = {
     todos : [
@@ -18,6 +18,11 @@ const todoReducer = (state = initialState, action) => {
             return {
                 todos: state.todos.filter((todo) => todo.id !== action.payload.id)
             }
+        case EDIT_TODO:
+            return {
+                todos: state.todos.map((todo) => todo.id === action.payload.id ? Object.assign({}, action.payload) : todo)
+            }
+            
         default:
             return state
     }
