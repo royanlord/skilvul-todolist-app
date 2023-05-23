@@ -2,26 +2,51 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addTodo, deleteTodo } from "../redux/actions/todoAction"
+import { addTodo, deleteTodo, editTodo } from "../redux/actions/todoAction"
 
 export const TodoList = () => {
     const dispatch = useDispatch()
     const [inputTodo, setInputTodo] = useState("")
+    const [updateTodo, setUpdateTodo] = useState(null)
     const {todos} = useSelector(state => state)
-    console.log(todos);
+    // console.log(todos);
     
     const handleSubmit = (e) => {
         e.preventDefault()
         // console.log(inputTodo);
-        
-        const newTodo = {
-            id: Date.now(),
-            title: inputTodo,
-            isDone: false
+        if (!updateTodo) {           
+            // let id = 0
+            // if (todos.length > 0) {
+            //     let max = 0
+            //     for (let todo of todos) {
+            //         if (todo.id > max) max = todo.id
+            //     }
+            //     id = max + 1
+            // }
+
+            const newTodo = {
+                id: Date.now(),
+                title: inputTodo,
+                isDone: false
+            }
+    
+            dispatch(addTodo(newTodo))
+
+            // console.log(newTodo);
+        } else {
+            updateTodo.title = inputTodo
+            dispatch(editTodo(updateTodo))
+            setUpdateTodo(null)
         }
 
-        dispatch(addTodo(newTodo))
         setInputTodo("")
+
+    }
+
+    const handleEdit = (todoId, updateTitle) => {
+        const todo = {id: todoId, title: updateTitle}
+        setInputTodo(updateTitle)
+        setUpdateTodo(todo)
     }
 
     return (
@@ -35,7 +60,6 @@ export const TodoList = () => {
                             <input 
                                 type="text" 
                                 name="todo" 
-                                id="" 
                                 className="form-control py-lg-2 py-1" 
                                 placeholder='New Todo' 
                                 value={inputTodo} 
@@ -43,7 +67,7 @@ export const TodoList = () => {
                             />
                         </div>
                         <div className="col-lg-2 col-md-12 pt-lg-0 pt-2">
-                            <button type='submit' className='btn btn-primary py-lg-2 py-1 w-100'>Add</button>
+                            {updateTodo ? (<button type='submit' className='btn btn-primary py-lg-2 py-1 w-100'>Update</button>) : (<button type='submit' className='btn btn-primary py-lg-2 py-1 w-100'>Add</button>)}
                         </div>
                         </div>
                     </form>
@@ -76,7 +100,9 @@ export const TodoList = () => {
                                                 </label>
                                             </div>
                                             <div className="btn-group">
-                                                <button className="btn" style={{padding: "7px", border: "none"}}>
+                                                <button 
+                                                    onClick={() => handleEdit(item.id, item.title)} className="btn" style={{padding: "7px", border: "none"}}
+                                                >
                                                     <FontAwesomeIcon icon={faPen} size="sm" style={{color: "green"}} />
                                                 </button>
                                                 <button onClick={() => dispatch(deleteTodo(item))} className="btn" style={{padding: "7px", border: "none"}}>
