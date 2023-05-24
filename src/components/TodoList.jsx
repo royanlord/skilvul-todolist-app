@@ -2,7 +2,7 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addTodo, deleteTodo, editTodo } from "../redux/actions/todoAction"
+import { addTodo, completeTodo, deleteTodo, editTodo } from "../redux/actions/todoAction"
 
 export const TodoList = () => {
     const dispatch = useDispatch()
@@ -49,6 +49,12 @@ export const TodoList = () => {
         setUpdateTodo(todo)
     }
 
+    const handleComplete = (item) => {
+        dispatch(completeTodo(item))
+    }
+
+    console.log(todos);
+
     return (
         <>
             <div className="container box">
@@ -94,8 +100,14 @@ export const TodoList = () => {
                                     {todos.map((item, index) => (
                                         <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                                             <div className="form-check">
-                                                <input type="checkbox" className='form-check-input' name="" id="" />
-                                                <label className="form-check-label">
+                                                <input 
+                                                    type="checkbox" 
+                                                    className='form-check-input' 
+                                                    name="" 
+                                                    id="" 
+                                                    checked={item.isDone} 
+                                                    onChange={() => handleComplete(item)} />
+                                                <label className={item.isDone ? "text-decoration-line-through text-muted form-check-label" : "form-check-label"}>
                                                     {item.title}
                                                 </label>
                                             </div>
