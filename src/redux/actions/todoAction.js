@@ -1,6 +1,7 @@
 export const ADD_TODO = "ADD_TODO"
 export const DELETE_TODO = "DELETE_TODO"
 export const EDIT_TODO = "EDIT_TODO"
+export const COMPLETE_TODO = "COMPLETE_TODO"
 
 // let myId = 0
 
@@ -22,6 +23,13 @@ export const deleteTodo = (todo) => {
 export const editTodo = (todo) => {
     return {
         type: EDIT_TODO,
+        payload: todo
+    }
+}
+
+export const completeTodo = (todo) => {
+    return {
+        type: COMPLETE_TODO,
         payload: todo
     }
 }
