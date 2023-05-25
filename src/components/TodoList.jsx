@@ -93,7 +93,10 @@ export const TodoList = () => {
         <>
             <div className="container box">
                 <h1 className='text-center pt-4'>Todolist App</h1>
-                <div className="todo-input d-flex justify-content-center mt-lg-5 mt-4">
+                <div className="d-flex justify-content-center">
+                    <hr style={{borderRadius: "5px", height: 2, color: "#CD1818", borderColor: "#CD1818", backgroundColor: "#CD1818"}} width="60%" />
+                </div>
+                <div className="todo-input d-flex justify-content-center mt-lg-4 mt-3">
                     <form onSubmit={handleSubmit}>
                         <div className="row d-flex justify-content-center">
                         <div className="col-lg-7 col-md-12">
