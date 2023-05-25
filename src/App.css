@@ -22,6 +22,22 @@ form {
   width: 70%;
 }
 
+form .btn-update:hover {
+  background-color: #2B7A0B !important;
+}
+
+form .btn-update:active {
+  background-color: #24610c !important;
+}
+
+form .btn-add:hover {
+  background-color: #484CB0 !important;
+}
+
+form .btn-add:active {
+  background-color: #362999 !important;
+}
+
 .todos {
   width: 55%;
 }

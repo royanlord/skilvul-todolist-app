@@ -112,7 +112,29 @@ export const TodoList = () => {
                             />
                         </div>
                         <div className="col-lg-2 col-md-12 pt-lg-0 pt-2">
-                            {updateTodo ? (<button type='submit' className='btn btn-primary py-lg-2 py-1 w-100'>Update</button>) : (<button type='submit' className='btn btn-primary py-lg-2 py-1 w-100'>Add</button>)}
+                            {updateTodo ? (
+                                <button 
+                                    type='submit' 
+                                    className='btn btn-update btn-primary py-lg-2 py-1 w-100' 
+                                    style={{
+                                        backgroundColor: "#379237", 
+                                        border: "none"
+                                    }}
+                                >
+                                    Update
+                                </button>
+                            ) : (
+                                <button 
+                                    type='submit' 
+                                    className='btn btn-add btn-primary py-lg-2 py-1 w-100' 
+                                    style={{
+                                        backgroundColor: "#4636FC", 
+                                        border: "none"
+                                    }}
+                                >
+                                    Add
+                                </button>
+                            )}
                         </div>
                         </div>
                     </form>
