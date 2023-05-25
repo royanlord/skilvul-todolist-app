@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { activeFilterTodo, addTodo, completeFilterTodo, completeTodo, deleteTodo, editTodo } from "../redux/actions/todoAction"
 import withReactContent from "sweetalert2-react-content"
 import Swal from "sweetalert2"
+import noData from "../assets/no-data.svg"
 
 export const TodoList = () => {
     const dispatch = useDispatch()
@@ -167,38 +168,56 @@ export const TodoList = () => {
                         <div className="tab-content mt-2" id="myTabContent">
                             <div className="tab-pane fade show active" id="all-tab-pane" role="tabpanel" aria-labelledby="all-tab" tabIndex="0">
                                 <ul className="list-group">
-                                    {todos.map((item, index) => (
-                                        <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                                            <div className="form-check">
-                                                <input 
-                                                    type="checkbox" 
-                                                    className='form-check-input' 
-                                                    name="" 
-                                                    id="" 
-                                                    checked={item.isDone} 
-                                                    onChange={() => handleComplete(item)} 
-                                                />
-                                                <label className={item.isDone ? "text-decoration-line-through text-muted form-check-label" : "form-check-label"}>
-                                                    {item.title}
-                                                </label>
+                                    {todos.length === 0 ? (
+                                        // <h1>data kosong</h1>
+                                        <>
+                                            <div className="d-flex justify-content-center">
+                                                <img src={noData} alt="no-data-img" style={{height: "350px", width: "350px", marginTop: "-30px"}} />
                                             </div>
-                                            <div className="btn-group">
-                                                <button 
-                                                    onClick={() => handleEdit(item.id, item.title)} className="btn" style={{padding: "7px", border: "none"}}
-                                                >
-                                                    <FontAwesomeIcon className="faPen" icon={faPen} size="sm" style={{color: "green"}} />
-                                                </button>
-                                                <button onClick={() => dispatch(deleteTodo(item))} className="btn" style={{padding: "7px", border: "none"}}>
-                                                    <FontAwesomeIcon className="faTrash" icon={faTrash} size="sm" style={{color: "red"}} />
-                                                </button>
-                                            </div>
-                                        </li>
-                                    ))}
+                                            <h4 className="text-muted text-center" style={{marginTop: "-70px"}}>No Data Available</h4>
+                                        </>
+                                    ) : (
+                                        todos.map((item, index) => (
+                                            <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                                                <div className="form-check">
+                                                    <input 
+                                                        type="checkbox" 
+                                                        className='form-check-input' 
+                                                        name="" 
+                                                        id="" 
+                                                        checked={item.isDone} 
+                                                        onChange={() => handleComplete(item)} 
+                                                    />
+                                                    <label className={item.isDone ? "text-decoration-line-through text-muted form-check-label" : "form-check-label"}>
+                                                        {item.title}
+                                                    </label>
+                                                </div>
+                                                <div className="btn-group">
+                                                    <button 
+                                                        onClick={() => handleEdit(item.id, item.title)} className="btn" style={{padding: "7px", border: "none"}}
+                                                    >
+                                                        <FontAwesomeIcon className="faPen" icon={faPen} size="sm" style={{color: "green"}} />
+                                                    </button>
+                                                    <button onClick={() => dispatch(deleteTodo(item))} className="btn" style={{padding: "7px", border: "none"}}>
+                                                        <FontAwesomeIcon className="faTrash" icon={faTrash} size="sm" style={{color: "red"}} />
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        ))
+                                    )
+                                    }
                                 </ul>
                             </div>
                             <div className="tab-pane fade" id="active-tab-pane" role="tabpanel" aria-labelledby="active-tab" tabIndex="0">
                                 <ul className="list-group">
-                                    {filter.map((item, index) => (
+                                    {filter.length === 0 ? (
+                                        <>
+                                            <div className="d-flex justify-content-center">
+                                                <img src={noData} alt="no-data-img" style={{height: "350px", width: "350px", marginTop: "-30px"}} />
+                                            </div>
+                                            <h4 className="text-muted text-center" style={{marginTop: "-70px"}}>No Data Available</h4>
+                                        </>
+                                    ) : (filter.map((item, index) => (
                                             <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                                                 <div className="form-check">
                                                     <input 
@@ -240,12 +259,20 @@ export const TodoList = () => {
                                                 </div>
                                             </li>
                                         ))
+                                    )
                                     }
                                 </ul>
                             </div>
                             <div className="tab-pane fade" id="completed-tab-pane" role="tabpanel" aria-labelledby="completed-tab" tabIndex="0">
                                 <ul className="list-group">
-                                    {filter.map((item, index) => (
+                                    {filter.length === 0 ? (
+                                        <>
+                                            <div className="d-flex justify-content-center">
+                                                <img src={noData} alt="no-data-img" style={{height: "350px", width: "350px", marginTop: "-30px"}} />
+                                            </div>
+                                            <h4 className="text-muted text-center" style={{marginTop: "-70px"}}>No Data Available</h4>
+                                        </>
+                                    ) : (filter.map((item, index) => (
                                             <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                                                 <div className="form-check">
                                                     <input 
@@ -291,6 +318,7 @@ export const TodoList = () => {
                                                 </div>
                                             </li>
                                         ))
+                                    )
                                     } 
                                 </ul>
                             </div>
