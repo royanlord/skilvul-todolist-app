@@ -187,6 +187,7 @@ export const TodoList = () => {
                                                         id="" 
                                                         checked={item.isDone} 
                                                         onChange={() => handleComplete(item)} 
+                                                        style={{cursor: "pointer"}}
                                                     />
                                                     <label className={item.isDone ? "text-decoration-line-through text-muted form-check-label" : "form-check-label"}>
                                                         {item.title}
@@ -230,6 +231,7 @@ export const TodoList = () => {
                                                             handleComplete(item)
                                                             dispatch(activeFilterTodo(todos))
                                                         }} 
+                                                        style={{cursor: "pointer"}}
                                                     />
                                                     <label className={item.isDone ? "text-decoration-line-through text-muted form-check-label" : "form-check-label"}>
                                                         {item.title}
@@ -285,6 +287,7 @@ export const TodoList = () => {
                                                             handleComplete(item)
                                                             dispatch(completeFilterTodo(todos))
                                                         }} 
+                                                        style={{cursor: "pointer"}}
                                                     />
                                                     <label className={item.isDone ? "text-decoration-line-through text-muted form-check-label" : "form-check-label"}>
                                                         {item.title}
