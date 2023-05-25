@@ -153,7 +153,7 @@ export const TodoList = () => {
                                 </button>
                             </li>
                         </ul>
-                        <div className="tab-content" id="myTabContent">
+                        <div className="tab-content mt-2" id="myTabContent">
                             <div className="tab-pane fade show active" id="all-tab-pane" role="tabpanel" aria-labelledby="all-tab" tabIndex="0">
                                 <ul className="list-group">
                                     {todos.map((item, index) => (
@@ -175,10 +175,10 @@ export const TodoList = () => {
                                                 <button 
                                                     onClick={() => handleEdit(item.id, item.title)} className="btn" style={{padding: "7px", border: "none"}}
                                                 >
-                                                    <FontAwesomeIcon icon={faPen} size="sm" style={{color: "green"}} />
+                                                    <FontAwesomeIcon className="faPen" icon={faPen} size="sm" style={{color: "green"}} />
                                                 </button>
                                                 <button onClick={() => dispatch(deleteTodo(item))} className="btn" style={{padding: "7px", border: "none"}}>
-                                                    <FontAwesomeIcon icon={faTrash} size="sm" style={{color: "red"}} />
+                                                    <FontAwesomeIcon className="faTrash" icon={faTrash} size="sm" style={{color: "red"}} />
                                                 </button>
                                             </div>
                                         </li>

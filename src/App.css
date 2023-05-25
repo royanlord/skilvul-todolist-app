@@ -11,7 +11,8 @@ body {
 .box {
   width: 60%;
   margin-top: 12vh;
-  height: 75vh;
+  padding-bottom: 45px;
+  height: auto;
   border-radius: 15px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   background-color: white;
@@ -33,6 +34,17 @@ input[type="text"] {
   word-break: break-all;
 }
 
+.nav-link {
+  color: rgba(0, 0, 0, 0.605);
+  font-weight: 500;
+  font-size: 0.9rem !important;
+}
+
+.nav-link.active {
+  color: blue !important;
+  font-weight: 600;
+}
+
 /* .todo-input button {
   width: 100%;
 } */
@@ -43,5 +55,17 @@ input[type="text"] {
 
   .todos {
     width: 80%;
+  }
+
+  .nav-link {
+    font-size: 0.6rem !important;
+  }
+
+  label, .faPen, .faTrash {
+    font-size: 0.8rem !important;
+  }
+
+  input[type="checkbox"] {
+    font-size: 0.9rem !important;
   }
 }
