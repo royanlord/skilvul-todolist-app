@@ -177,7 +177,7 @@ export const TodoList = () => {
                                             <div className="d-flex justify-content-center">
                                                 <img src={noData} alt="no-data-img" style={{height: "350px", width: "350px", marginTop: "-30px"}} />
                                             </div>
-                                            <h4 className="text-muted text-center" style={{marginTop: "-70px"}}>No Data Available</h4>
+                                            <h4 className="text-muted text-center" style={{marginTop: "-70px"}}>No Tasks Available</h4>
                                         </>
                                     ) : (
                                         todos.map((item, index) => (
@@ -198,7 +198,7 @@ export const TodoList = () => {
                                                 </div>
                                                 <div className="btn-group">
                                                     <button 
-                                                        onClick={() => handleEdit(item.id, item.title)} className="btn" style={{padding: "7px", border: "none"}}
+                                                        onClick={() => handleEdit(item.id, item.title)} className={item.isDone ? "d-none" : "btn"} style={{padding: "7px", border: "none"}}
                                                     >
                                                         <FontAwesomeIcon className="faPen" icon={faPen} size="sm" style={{color: "green"}} />
                                                     </button>
@@ -219,7 +219,7 @@ export const TodoList = () => {
                                             <div className="d-flex justify-content-center">
                                                 <img src={noData} alt="no-data-img" style={{height: "350px", width: "350px", marginTop: "-30px"}} />
                                             </div>
-                                            <h4 className="text-muted text-center" style={{marginTop: "-70px"}}>No Data Available</h4>
+                                            <h4 className="text-muted text-center" style={{marginTop: "-70px"}}>No Active Tasks</h4>
                                         </>
                                     ) : (filter.map((item, index) => (
                                             <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
@@ -275,7 +275,7 @@ export const TodoList = () => {
                                             <div className="d-flex justify-content-center">
                                                 <img src={noData} alt="no-data-img" style={{height: "350px", width: "350px", marginTop: "-30px"}} />
                                             </div>
-                                            <h4 className="text-muted text-center" style={{marginTop: "-70px"}}>No Data Available</h4>
+                                            <h4 className="text-muted text-center" style={{marginTop: "-70px"}}>No Completed Tasks</h4>
                                         </>
                                     ) : (filter.map((item, index) => (
                                             <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
@@ -302,7 +302,7 @@ export const TodoList = () => {
                                                             handleEdit(item.id, item.title)
                                                             dispatch(completeFilterTodo(todos))
                                                         }} 
-                                                        className="btn" 
+                                                        className={item.isDone ? "d-none" : "btn"} 
                                                         style={
                                                             {padding: "7px", border: "none"}
                                                         }
