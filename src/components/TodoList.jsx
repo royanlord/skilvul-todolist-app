@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { activeFilterTodo, addTodo, completeFilterTodo, completeTodo, deleteTodo, editTodo } from "../redux/actions/todoAction"
+import withReactContent from "sweetalert2-react-content"
+import Swal from "sweetalert2"
 
 export const TodoList = () => {
     const dispatch = useDispatch()
@@ -10,25 +12,34 @@ export const TodoList = () => {
     const [focusOnFilter, setFocusOnFilter] = useState(null)
     const [updateTodo, setUpdateTodo] = useState(null)
     const {todos, filter} = useSelector(state => state)
+    const MySwal = withReactContent(Swal)
     // console.log(todos);
     
     const handleSubmit = (e) => {
         e.preventDefault()
         // console.log(inputTodo);
-        if (!updateTodo) {           
-            
-            const newTodo = {
-                id: Date.now(),
-                title: inputTodo,
-                isDone: false
-            }
-    
-            dispatch(addTodo(newTodo))
-            // console.log(newTodo);
+        if (inputTodo === "") {
+            MySwal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Input can't be empty"
+            })
         } else {
-            updateTodo.title = inputTodo
-            dispatch(editTodo(updateTodo))
-            setUpdateTodo(null)
+            if (!updateTodo) {           
+                
+                const newTodo = {
+                    id: Date.now(),
+                    title: inputTodo,
+                    isDone: false
+                }
+        
+                dispatch(addTodo(newTodo))
+                // console.log(newTodo);
+            } else {
+                updateTodo.title = inputTodo
+                dispatch(editTodo(updateTodo))
+                setUpdateTodo(null)
+            }
         }
 
         setInputTodo("")
