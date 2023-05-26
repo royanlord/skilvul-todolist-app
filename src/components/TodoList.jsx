@@ -92,7 +92,7 @@ export const TodoList = () => {
     return (
         <>
             <div className="container box">
-                <h1 className='text-center pt-4'>Todolist App</h1>
+                <h1 className='text-center fw-semibold pt-4'>Todolist App</h1>
                 <div className="d-flex justify-content-center">
                     <hr style={{borderRadius: "5px", height: 2, color: "#CD1818", borderColor: "#CD1818", backgroundColor: "#CD1818"}} width="60%" />
                 </div>
